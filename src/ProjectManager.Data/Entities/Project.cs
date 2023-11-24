@@ -1,10 +1,10 @@
 ﻿namespace ProjectManager.Data.Entities;
-[Table(nameof(Todo))]
+[Table(nameof(Project))]
 
-public class Todo : ITrackable
+public class Project : ITrackable
 {
     public Guid Id { get; set; }
-    public string Title { get; set; } = null!;
+    public string Name { get; set; } = null!;
     public string? Description { get; set; }
     public bool Done { get; set; }
     public Instant CreateAt { get; set; }
@@ -14,17 +14,14 @@ public class Todo : ITrackable
     public Instant? DeleteAt { get; set; }
     public string? DeleteBy { get; set; }
 
-    public Guid ProjektId { get; set; }
-    public Project Projekt { get; set; } = null!;
-
+    public ICollection<Todo> Todos { get; set; } = new HashSet<Todo>();
 }
 
-public static class TodoExtentions
+public static class ProjektExtentions
 {
-    public static IQueryable<Todo> FilterDeleted(this IQueryable<Todo> query)
+    public static IQueryable<Project> FilterDeleted(this IQueryable<Project> query)
         => query
         .Where(x => x.DeleteAt == null)
         ;
 }
-
 

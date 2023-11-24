@@ -2,7 +2,9 @@
 {
     public class TodoCreateModel
     {
-        public string Title { get; set; } = null;
+        public string Title { get; set; } = null!;
         public string? Description { get; set; }
+        public Guid ProjektId { get; set; }
+
     }
 }

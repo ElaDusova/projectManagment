@@ -1,5 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
-using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
+using NodaTime;
 
 #nullable disable
 
@@ -15,11 +16,16 @@ namespace ProjectManager.Data.Migrations
                 name: "Todo",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
                     Title = table.Column<string>(type: "text", nullable: false),
                     Description = table.Column<string>(type: "text", nullable: true),
-                    Done = table.Column<bool>(type: "boolean", nullable: false)
+                    Done = table.Column<bool>(type: "boolean", nullable: false),
+                    CreateAt = table.Column<Instant>(type: "timestamp with time zone", nullable: false),
+                    CreateBy = table.Column<string>(type: "text", nullable: false),
+                    ModifiedAt = table.Column<Instant>(type: "timestamp with time zone", nullable: false),
+                    ModifiedBy = table.Column<string>(type: "text", nullable: false),
+                    DeleteAt = table.Column<Instant>(type: "timestamp with time zone", nullable: true),
+                    DeleteBy = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
