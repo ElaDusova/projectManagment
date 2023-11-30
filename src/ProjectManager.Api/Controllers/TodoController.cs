@@ -37,7 +37,7 @@ namespace ProjectManager.Api.Controllers
                 Id = Guid.NewGuid(),
                 Title = model.Title,
                 Description = model.Description,
-                ProjektId = model.ProjektId,
+                ProjectId = model.ProjectId,
             }.SetCreateBySystem(now);
 
             _dbContext.Add(newTodo);
@@ -109,6 +109,7 @@ namespace ProjectManager.Api.Controllers
             }
 
             var now = _clock.GetCurrentInstant();
+
             var toUpdate = new TodoCreateModel
             {
                 Description = dbEntity.Description,

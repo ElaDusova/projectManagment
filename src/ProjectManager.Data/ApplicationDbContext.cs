@@ -7,7 +7,7 @@ namespace ProjectManager.Data
     {
         public DbSet<Todo> Todos { get; set; } = null!;
 
-        public DbSet<Project> Projekts { get; set; } = null!;
+        public DbSet<Project> Projects { get; set; } = null!;
         public ApplicationDbContext(DbContextOptions options) : base(options)
         { 
         }

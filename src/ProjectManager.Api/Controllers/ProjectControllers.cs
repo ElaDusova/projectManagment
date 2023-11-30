@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.EntityFrameworkCore;
 using NodaTime;
 using NodaTime.Text;
-using ProjectManager.Api.Controllers.Models.Projekts;
+using ProjectManager.Api.Controllers.Models.Projects;
 using ProjectManager.Api.Controllers.Models.Todos;
 using ProjectManager.Data;
 using ProjectManager.Data.Entities;
@@ -14,19 +14,19 @@ using System.Security.Cryptography.X509Certificates;
 namespace ProjectManager.Api.Controllers
 {
     [ApiController]
-    public class ProjektController : ControllerBase
+    public class ProjectController : ControllerBase
     {
-        private readonly ILogger<ProjektController> _logger;
+        private readonly ILogger<ProjectController> _logger;
         private readonly IClock _clock;
         private readonly ApplicationDbContext _dbContext;
-        public ProjektController(ILogger<ProjektController> logger, IClock clock, ApplicationDbContext dbContext)
+        public ProjectController(ILogger<ProjectController> logger, IClock clock, ApplicationDbContext dbContext)
         {
             _logger = logger;
             _clock = clock;
             _dbContext = dbContext;
         }
 
-        [HttpPost("api/v1/Projekt")]
+        [HttpPost("api/v1/Project")]
 
         public async Task<ActionResult> Create(
             [FromBody] ProjectCreateModel model
@@ -35,7 +35,7 @@ namespace ProjectManager.Api.Controllers
             var now = _clock.GetCurrentInstant();
 
 
-            var newProjekt = new Project
+            var newProject = new Project
             {
                 Id = Guid.NewGuid(),
                 Name = model.Name,
@@ -43,7 +43,7 @@ namespace ProjectManager.Api.Controllers
             }.SetCreateBySystem(now);
 
 
-            var uniqueCheck = await _dbContext.Set<Project>().AnyAsync(x => x.Name == newProjekt.Name);
+            var uniqueCheck = await _dbContext.Set<Project>().AnyAsync(x => x.Name == newProject.Name);
             if (uniqueCheck)
             {
                 ModelState.AddModelError<ProjectCreateModel>(x => x.Name, "Name is not unique.");
@@ -52,7 +52,7 @@ namespace ProjectManager.Api.Controllers
             {
                 return ValidationProblem(ModelState);
             }
-            _dbContext.Add(newProjekt);
+            _dbContext.Add(newProject);
             await _dbContext.SaveChangesAsync();
 
             return Ok();
@@ -80,7 +80,7 @@ namespace ProjectManager.Api.Controllers
             return Ok(dbEntities);
         }
 
-        [HttpGet("api/v1/Projekt/{id}")]
+        [HttpGet("api/v1/Project/{id}")]
 
         public async Task<ActionResult<IEnumerable<ProjectDetailModel>>> Get(
             [FromRoute] Guid id
@@ -106,7 +106,7 @@ namespace ProjectManager.Api.Controllers
 
             return Ok(dbEntities);
         }
-        [HttpPatch("api/v1/Projekt/{id}")]
+        [HttpPatch("api/v1/Project/{id}")]
         public async Task<ActionResult> Update(
          [FromRoute] Guid id,
          [FromBody] ProjectCreateModel patch
@@ -124,7 +124,7 @@ namespace ProjectManager.Api.Controllers
             return NoContent();
         }
 
-        [HttpDelete("api/v1/Projekt/{id}")]
+        [HttpDelete("api/v1/Project/{id}")]
         public async Task<ActionResult> Delete(
     [FromRoute] Guid id
     )

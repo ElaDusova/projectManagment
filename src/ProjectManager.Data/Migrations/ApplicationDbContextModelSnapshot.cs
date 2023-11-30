@@ -96,7 +96,7 @@ namespace ProjectManager.Data.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<Guid>("ProjektId")
+                    b.Property<Guid>("ProjectId")
                         .HasColumnType("uuid");
 
                     b.Property<string>("Title")
@@ -105,20 +105,20 @@ namespace ProjectManager.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ProjektId");
+                    b.HasIndex("ProjectId");
 
                     b.ToTable("Todo");
                 });
 
             modelBuilder.Entity("ProjectManager.Data.Entities.Todo", b =>
                 {
-                    b.HasOne("ProjectManager.Data.Entities.Project", "Projekt")
+                    b.HasOne("ProjectManager.Data.Entities.Project", "Project")
                         .WithMany("Todos")
-                        .HasForeignKey("ProjektId")
+                        .HasForeignKey("ProjectId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Projekt");
+                    b.Navigation("Project");
                 });
 
             modelBuilder.Entity("ProjectManager.Data.Entities.Project", b =>

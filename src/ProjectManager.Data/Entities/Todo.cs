@@ -14,8 +14,8 @@ public class Todo : ITrackable
     public Instant? DeleteAt { get; set; }
     public string? DeleteBy { get; set; }
 
-    public Guid ProjektId { get; set; }
-    public Project Projekt { get; set; } = null!;
+    public Guid ProjectId { get; set; }
+    public Project Project { get; set; } = null!;
 
 }
 

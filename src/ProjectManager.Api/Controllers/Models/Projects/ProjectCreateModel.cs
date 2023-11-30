@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace ProjectManager.Api.Controllers.Models.Projekts
+namespace ProjectManager.Api.Controllers.Models.Projects
 {
     public class ProjectCreateModel
     {

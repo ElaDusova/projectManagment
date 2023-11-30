@@ -13,7 +13,7 @@ namespace ProjectManager.Data.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AddColumn<Guid>(
-                name: "ProjektId",
+                name: "ProjectId",
                 table: "Todo",
                 type: "uuid",
                 nullable: false,
@@ -40,14 +40,14 @@ namespace ProjectManager.Data.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Todo_ProjektId",
+                name: "IX_Todo_ProjectId",
                 table: "Todo",
-                column: "ProjektId");
+                column: "ProjectId");
 
             migrationBuilder.AddForeignKey(
-                name: "FK_Todo_Project_ProjektId",
+                name: "FK_Todo_Project_ProjectId",
                 table: "Todo",
-                column: "ProjektId",
+                column: "ProjectId",
                 principalTable: "Project",
                 principalColumn: "Id",
                 onDelete: ReferentialAction.Cascade);
@@ -57,18 +57,18 @@ namespace ProjectManager.Data.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(
-                name: "FK_Todo_Project_ProjektId",
+                name: "FK_Todo_Project_ProjectId",
                 table: "Todo");
 
             migrationBuilder.DropTable(
                 name: "Project");
 
             migrationBuilder.DropIndex(
-                name: "IX_Todo_ProjektId",
+                name: "IX_Todo_ProjectId",
                 table: "Todo");
 
             migrationBuilder.DropColumn(
-                name: "ProjektId",
+                name: "ProjectId",
                 table: "Todo");
         }
     }

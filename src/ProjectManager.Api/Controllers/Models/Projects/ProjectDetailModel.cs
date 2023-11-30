@@ -2,7 +2,7 @@
 using ProjectManager.Data.Entities;
 using System.Runtime.CompilerServices;
 
-namespace ProjectManager.Api.Controllers.Models.Projekts
+namespace ProjectManager.Api.Controllers.Models.Projects
 {
     public class ProjectDetailModel
     {
@@ -14,7 +14,7 @@ namespace ProjectManager.Api.Controllers.Models.Projekts
         public IEnumerable<TodoDetailModel> Todos { get; set; } = Enumerable.Empty<TodoDetailModel>();
     }
 
-    public static class ProjektDetailModelExtentions
+    public static class ProjectDetailModelExtentions
     {
         public static ProjectDetailModel ToDetail(this Project source)
         => new()

@@ -17,7 +17,7 @@ public class Project : ITrackable
     public ICollection<Todo> Todos { get; set; } = new HashSet<Todo>();
 }
 
-public static class ProjektExtentions
+public static class ProjectExtentions
 {
     public static IQueryable<Project> FilterDeleted(this IQueryable<Project> query)
         => query
